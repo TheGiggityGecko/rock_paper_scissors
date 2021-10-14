@@ -6,7 +6,79 @@
     </head>
     <body>
         <script>
-            
+
+            function cpuMove() {                //returns the CPU's move as a string
+                let num;
+                num = Math.random();            //sets num to a random number from 0 - 1
+                if (num < 0.33) {
+                    return 'rock';
+                } else if (num < 0.66) {
+                    return 'paper';
+                } else {
+                    return 'scissors';
+                }
+            }
+
+            function whoWins(user, cpu) {        //takes user move and cpu move as strings and returns
+                if (user == cpu) {               //result of game as a string
+                    return 'tie'
+                }
+                if (user == 'rock' && cpu == 'scissors' ||
+                    user == 'scissors' && cpu == 'paper' ||
+                    user == 'paper' && cpu == 'rock'){
+                        return 'you win'
+                }
+                if (user == 'rock' && cpu == 'paper' ||
+                    user == 'scissors' && cpu == 'rock' ||
+                    user == 'paper' && cpu == 'scissors' ){
+                        return 'you lose'
+                    }
+
+            }
+                
+            function rps(){
+                let userMove;
+                let opponentMove;
+                let result;
+
+                userMove = prompt('Type rock, paper, or scissors.').toLowerCase();
+                if (userMove !== 'rock' && userMove !== 'paper' && userMove !== 'scissors'){
+                    return alert('INVALID!');
+                }
+                //console.log('user: ' + userMove)
+                opponentMove = cpuMove();
+                //console.log('cpu: ' + opponentMove)
+                result = whoWins(userMove, opponentMove);
+                //console.log(result);
+                return result
+            }
+
+            function firstToFive(){
+                let wins = 0;
+                let losses = 0;
+                let ties = 0;
+                let result
+
+                while(wins < 5  && losses < 5){
+                    result = rps();
+                    switch (result){
+                        case 'tie':
+                            ties++;
+                            alert('TIE!');
+                            break;
+                        case 'you win':
+                            wins++;
+                            alert('VICTORY!');
+                            break;
+                        case 'you lose':
+                            losses++
+                            alert('DEFEAT!');
+                            break;
+                    }
+                }
+                console.log(`wins: ${wins}, losses: ${losses}, ties: ${ties}`);
+            }
+
         </script>
     </body>
 </html>
